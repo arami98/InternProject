@@ -1,9 +1,15 @@
 # InternProject
-Spring Boot API Demo
+Spring Boot API test
 
-##Version
+
+## Test API
+[Get] : http://localhost:8080/api/test/user/{loginId}
+
+
+## Version
 * Java 8
 * Spring Boot 2.5.3
+
 
 ## Dependencies
 * Spring Boot DevTools
