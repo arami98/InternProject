@@ -1,8 +1,13 @@
 # InternProject
 Spring Boot API test
 
+1. install lombok.jar
+2. import InternProject
+3. Run on Server
+4. test API
 
-## Test API
+
+## Test API URI
 [Get] : http://localhost:8080/api/test/user/{loginId}
 
 
