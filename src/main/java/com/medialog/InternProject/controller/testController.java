@@ -1,11 +1,10 @@
 package com.medialog.InternProject.controller;
 
-import java.util.function.Supplier;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.medialog.InternProject.model.User;
@@ -25,5 +24,12 @@ public class testController {
 		});
 
 		return user;
+	}
+	
+	@GetMapping("/test/user")
+	public List<User> selectAll() {
+		List<User> list = userRepository.findAll();
+
+		return list;
 	}
 }
