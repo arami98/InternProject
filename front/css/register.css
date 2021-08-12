@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+*{
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+}
+
+header, footer{
+    text-align: center;
+    margin: 1em;
+}
+
+/* 회원가입 틀 */
+div{
+    border: 0.1em solid rgb(211, 206, 206);
+    width: 70%;
+    margin: auto;
+}
+
+/* header의 '회원 가입' 글 */
+p{
+    font-size: 1.5em;
+}
+
+/* 테이블 */
+div section table, div section table tr{
+    width: 100%;
+}
+
+div section table tr th{
+    width: 5em;
+}
+
+div section table tr td{
+    width: 15em;
+}
+
+/* 버튼 */
+.btn{
+    font-weight: bold;
+    padding: 0.5em;
+    border: 0;
+}
+
+/* table의 첫번째 열 */
+table th{
+    padding: 1em 2em 1em 0.5em;
+    background-color: rgb(228, 224, 224);
+    text-align: left;
+}
+
+/* table의 첫번째 열과 두번째 열 margin 주기 */
+table tr td input:nth-child(1), table tr td select{
+    margin-left: 0.5em;
+}
+
+/* Text input */
+table tr td input, table tr td select{
+    padding: 0.5em;
+    border: rgb(172, 170, 168) 1px solid;
+}
+
+/* 전화번호 */
+.tel{
+    width: 20%;
+}
+
+/* 중개인 등록번호 */
+#reg_no_input{
+    display: none;
+}
+
+.hide{
+    display: none;
+}
