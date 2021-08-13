@@ -15,12 +15,13 @@ public class BearerAuthInterceptor implements HandlerInterceptor {
 
     private Logger logger = LoggerFactory.getLogger(BearerAuthInterceptor.class);
 
-    @Autowired
     private AuthorizationExtractor authExtractor;
-
-    @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
+    public BearerAuthInterceptor(AuthorizationExtractor authExtractor, JwtTokenProvider jwtTokenProvider) {
+        this.authExtractor = authExtractor;
+        this.jwtTokenProvider = jwtTokenProvider;
+    }
 
     @Override
     public boolean preHandle(HttpServletRequest request,
