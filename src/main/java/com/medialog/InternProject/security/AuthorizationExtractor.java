@@ -4,9 +4,9 @@ import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Component;
 
-import jdk.internal.joptsimple.internal.Strings;
 
 @Component
 public class AuthorizationExtractor {
