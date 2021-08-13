@@ -13,11 +13,18 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
 	private Logger logger = LoggerFactory.getLogger(BearerAuthInterceptor.class);
 
-	@Autowired
-	private HandlerInterceptor bearerAuthInterceptor;
 
-	public void addInterceptors(InterceptorRegistry registry) {
-		logger.info(">>> Register Interceptor");
-		registry.addInterceptor(bearerAuthInterceptor).addPathPatterns("/api/test/user");
-	}
+    private final BearerAuthInterceptor bearerAuthInterceptor;
+
+    public WebMvcConfig(BearerAuthInterceptor bearerAuthInterceptor) {
+        this.bearerAuthInterceptor = bearerAuthInterceptor;
+    }
+
+    public void addInterceptors(InterceptorRegistry registry){
+
+       registry.addInterceptor(bearerAuthInterceptor)
+               .addPathPatterns("/user/register");
+
+        logger.info(">>> Register Interceptor");
+    }
 }
