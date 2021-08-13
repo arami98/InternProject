@@ -27,7 +27,7 @@ function handleButtonSubmit(event){
         5. 가입이 완료 된 후에는 주소 이외의 정보 수정을 금지합니다.
      */
     try {
-        checkUniqueID();
+        //checkUniqueID();
         hasCheckedPasswordStatus();
         checkInput();
         requestUserRegister();

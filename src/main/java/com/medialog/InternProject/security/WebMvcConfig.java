@@ -11,7 +11,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    private Logger logger = LoggerFactory.getLogger(BearerAuthInterceptor.class);
+	private Logger logger = LoggerFactory.getLogger(BearerAuthInterceptor.class);
+
 
     private final BearerAuthInterceptor bearerAuthInterceptor;
 
