@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.medialog.InternProject.model.User;
+import com.medialog.InternProject.model.UserList;
 import com.medialog.InternProject.repository.UserRepository;
 
 @RestController
@@ -19,11 +20,12 @@ public class testController {
 
 	@Autowired
 	TokenProvider provider;
+	
 	// context-path : /api
 	@GetMapping("/test/user/{id}")
 	public User selectOne(@PathVariable String id) {
 		User user = userRepository.findById(id).orElseThrow(() -> {
-			return new IllegalArgumentException("해당 사용자가 없습니다.");
+			return new IllegalArgumentException("�빐�떦 �궗�슜�옄媛� �뾾�뒿�땲�떎.");
 		});
 
 		return user;
