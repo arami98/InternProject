@@ -15,10 +15,13 @@ public class putController {
 	@Autowired
 	private UserRepository userRepository;
 
-	@PutMapping("/test/user/{id}")
-	public User selectOne(@PathVariable String id, @RequestBody User user) {
-		user.setLoginId(id);
+	@PutMapping("/user/{id}")
+	public User updateUser(@PathVariable String id, @RequestBody User user) {
+		User userUpdate = userRepository.findById(id).orElseThrow(() -> {
+			return new IllegalArgumentException("해당 사용자가 없습니다.");
+		});
 		
-		return null;
+		userUpdate.setAddr(user.getAddr());
+		return userRepository.save(userUpdate);
 	}
 }
