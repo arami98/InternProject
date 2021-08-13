@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.medialog.InternProject.model.User;
-import com.medialog.InternProject.model.UserList;
 
 public interface UserRepository extends JpaRepository<User, String>{
 	
