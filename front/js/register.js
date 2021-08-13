@@ -2,9 +2,10 @@ const buttonSubmit = document.querySelector("footer").querySelector(".btn#submit
 const buttonCancel = document.querySelector("footer").querySelector(".btn#cancel");
 const userForm = document.querySelector("form");
 const passwordCheckInput = userForm.getElementsByTagName("input").passwordCheck;
+const passwordInput = userForm.getElementsByTagName("input").password;
 const userTypeCheck = document.getElementById("userTypeCheck");
 
-let isUniqueID = false;
+let isUniqueID = true;
 let isPasswordChecked = false;
 
 
@@ -13,6 +14,7 @@ buttonSubmit.addEventListener("click",handleButtonSubmit);
 buttonCancel.addEventListener("click",handleButtonCancel);
 
 passwordCheckInput.addEventListener("change",checkPassword);
+passwordInput.addEventListener("change",checkPassword);
 
 userTypeCheck.addEventListener('click',checkUserTypeHandler);
 
@@ -99,29 +101,25 @@ function  unableSubmitForm(){
 }
 
 function handleButtonCancel(){
-        /*
-        클릭시 부모 페이지로 갑니다.
-        없으므로 빈 페이지로 이동
-        */
     window.history.back();
 };
 
 
 
-
-// 입력될 때 마다 패스워드를 체크합니다.
 function checkPassword(){
 
     const password = userForm.password.value;
     const passwordCheck = userForm.passwordCheck.value;
-
+    const passwordAnnount = document.getElementById("passwordAnnounce");
+    
     if(password === passwordCheck){
         isPasswordChecked = true;
+        passwordAnnount.classList.add("hide");
     }else{
         isPasswordChecked = false;
+        passwordAnnount.classList.remove("hide");
     }
 
-    console.log(isPasswordChecked);
 };
 
 

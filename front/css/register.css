@@ -66,6 +66,13 @@ table tr td input, table tr td select{
     width: 20%;
 }
 
+/* 패스워드 체크 */
+#passwordAnnounce{
+    color: red;
+    font-size: 0.5em;
+    margin-left: 10px;
+}
+
 /* 중개인 등록번호 */
 #reg_no_input{
     display: none;
