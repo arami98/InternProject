@@ -1,16 +1,16 @@
 package com.medialog.InternProject.model;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.hibernate.annotations.Columns;
-import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,30 +22,41 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tbNewUser")
+@Table(name = "NEW_USER_TB")
 public class User {
-	
+
 	@Id
+	@Column(nullable = false, length = 45)
 	private String loginId;
-	
+
+	@Column(nullable = false, length = 45)
 	private String loginPwd;
-	
+
+	@Column(nullable = false, length = 45)
 	private String name;
-	
+
+	@Column(nullable = false, length = 20)
 	private String ssn;
-	
+
+	@Column(nullable = false, length = 20)
 	private String tel;
-	
-	private String auth;
-	
+
+	@Enumerated(EnumType.STRING)
+	private Auth auth;
+
+	@Column(length = 20)
 	private String agentRegNo;
 	
+	@Column(nullable = false, columnDefinition = "json")
+	@Convert(attributeName = "addr", converter = JsonToMapConverter.class)
 	private String addr;
-	
-	@CreationTimestamp
-	private Timestamp regDt;
-	
-	@CreationTimestamp
-	private Timestamp updateDt;
-	
+
+	@Column(nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date regDt;
+
+	@Column(nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date updateDt;
+
 }
