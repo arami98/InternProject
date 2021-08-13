@@ -1,27 +1,22 @@
 package com.medialog.InternProject.controller;
 
 
-import com.medialog.InternProject.model.User;
 import com.medialog.InternProject.security.TokenResponse;
-import com.medialog.InternProject.service.RegisterUserService;
-import com.medialog.InternProject.service.SecurityService;
+import com.medialog.InternProject.service.SecurityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.text.ParseException;
 
 @RestController
 @RequestMapping("/authorization")
 public class AuthorizationController {
     
     @Autowired
-    SecurityService securityService;
+    SecurityServiceImpl securityService;
 
     @GetMapping("/token")
     public ResponseEntity<TokenResponse> token(){

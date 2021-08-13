@@ -5,13 +5,8 @@ import com.medialog.InternProject.security.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
-public class SecurityService {
 
-    @Autowired
-    TokenProvider jwtTokenProvider;
+interface SecurityService {
 
-    public String createToken(String id) {
-        return jwtTokenProvider.createToken(id);
-    }
+    String createToken(String id);
 }

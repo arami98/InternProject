@@ -2,23 +2,25 @@ package com.medialog.InternProject.controller;
 
 
 import com.medialog.InternProject.model.User;
+import com.medialog.InternProject.network.RegisterResponse;
 import com.medialog.InternProject.repository.UserRepository;
+import com.medialog.InternProject.security.BearerAuthInterceptor;
 import com.medialog.InternProject.service.RegisterUserService;
-import com.medialog.InternProject.service.SecurityService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
-import java.util.List;
 
 @RestController
 @RequestMapping("/user")
 public class RegisterUserController {
+
+    private Logger logger = LoggerFactory.getLogger(BearerAuthInterceptor.class);
 
     @Autowired
     RegisterUserService registerUserService;
@@ -27,16 +29,22 @@ public class RegisterUserController {
     UserRepository userRepository;
 
     @PostMapping("/register")
-    public ResponseEntity register(UserFrom userFrom){
+    public ResponseEntity<RegisterResponse> register(UserFrom userFrom){
 
-
+        RegisterResponse registerResponse;
         try {
             User user = userFrom.extractUser();
             registerUserService.register(user);
-            return ResponseEntity.ok().build();
+            registerResponse=new RegisterResponse("REGISTER SUCCESS","SUCCESS");
+            return ResponseEntity.ok().body(registerResponse);
         } catch (ParseException e) {
-            e.printStackTrace();
-            return ResponseEntity.badRequest().build();
+            logger.warn("ILLEGAL DATE FORM");
+            registerResponse=new RegisterResponse(e.getMessage(),"Fail");
+            return ResponseEntity.ok().body(registerResponse);
+        } catch (IllegalArgumentException e){
+            logger.warn("ILLEGAL register form");
+            registerResponse=new RegisterResponse(e.getMessage(),"Fail");
+            return ResponseEntity.ok().body(registerResponse);
         }
     }
 
