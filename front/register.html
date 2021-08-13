@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="./css/indexStyle.css"/>
+
+</head>
+<body>
+    <div>
+        <header>
+            <p>회원 가입</p>
+        </header>
+
+        <hr>
+
+        <form action="#" method="POST">
+            <section>
+                <table>
+
+                    <tr>
+                        <th>이름</th>
+                        <td><input type="text" name="name" required></td>
+                    </tr>
+
+                    <tr>
+                        <th>주민번호</th>
+                        <td><input type="text" name="ssn1" class="tel" required> - <input type="password" name="ssn2" class="tel" required></td>
+                    </tr>
+
+                    <tr>
+                        <th>전화번호</th>
+                        <td><input type="tel" name="tel1" class="tel" required> - <input type="tel" name="tel2" class="tel" required> - <input type="tel" name="tel3" class="tel" required></td>
+                    </tr>
+
+                    <tr>
+                        <th>아이디</th>
+                        <td>
+                            <input type="text" name="id" id="id"> 
+                            <input type="button" value="중복체크" class="btn" id="idCheck" required>
+                            <span id="idCheckRes"></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>비밀번호</th>
+                        <td><input type="password" name="password" required></td>
+                    </tr>
+
+                    <tr>
+                        <th>비밀번호 확인</th>
+                        <td><input type="password" name="passwordCheck" required></td>
+                    </tr>
+
+                    <tr>
+                        <th rowspan="4">집주소</th>
+                        <td><input type="text" name="city" placeholder="시/도" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><input type="text" name="country" placeholder="시/군/구" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><input type="text" name="dong" placeholder="동" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><input type="text" name="code" placeholder="우편번호" required></td>
+                    </tr>
+
+                    <tr>
+                        <th>이메일</th>
+                        <td>
+                            <input type="email" name="email" required> @
+                            <select name="email_com" required>
+                                <option>직접입력</option>
+                                <option>naver.com</option>
+                                <option>gmail.com</gmail></option>
+                                <option>nate.com</option>
+                                <option>hanmail.net</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>사용권한</th>
+                        <td id = "userTypeCheck">
+                            <input type="radio" name="userTypeCheck" value="agent"> 중개인
+                            <input type="radio" name="userTypeCheck" value="user"> 사용자
+                            <input type="text" name="regNo" class="hide" placeholder="등록번호" >
+                        </td>
+                    </tr>
+                </table>
+            </section>
+
+            <hr>
+
+            <footer>
+                <input type="submit" value="회원 가입" class="btn" id = "submit"/> &nbsp;&nbsp;
+                <input type="button" value="취소" class="btn" id = "cancel"/>
+            </footer>
+
+        </form>
+        <script src="./js/register.js"></script>
+    </div>
+</body>
+</html>
