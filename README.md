@@ -10,6 +10,8 @@ Spring Boot API test
 ## Test API URI
 [Get] : http://localhost:8080/api/test/user/{loginId}
 
+[Get] : http://localhost:8080/api/test/user
+
 
 ## Version
 * Java 8

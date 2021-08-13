@@ -2,6 +2,7 @@ package com.medialog.InternProject.controller;
 
 import java.util.List;
 
+import com.medialog.InternProject.security.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,8 @@ public class testController {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	TokenProvider provider;
 	// context-path : /api
 	@GetMapping("/test/user/{id}")
 	public User selectOne(@PathVariable String id) {
