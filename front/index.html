@@ -8,6 +8,11 @@
     <link rel="stylesheet" href = "./css/indexStyle.css"/>
     <title>Welcome Page</title>
 </head>
+
+<script src="../js/userList.js"></script>
+<script src="../js/userParse.js"></script>
+
+
 <body>
 
     <div class="container">
@@ -25,33 +30,18 @@
             </ul>
         </nav>
         <table class="user-list">
+
             <thead>
-            <tr>
-              <th scope="cols">seq</th>
-              <th scope="cols">이름</th>
-              <th scope="cols">ID</th>
-              <th scope="cols">주소</th>
-            </tr>
+                <tr>
+                    <th scope="cols">seq</th>
+                    <th scope="cols">이름</th>
+                    <th scope="cols">ID</th>
+                    <th scope="cols">주소</th>
+                </tr>
             </thead>
-            <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>이름</td>
-              <td>ID</td>
-              <td>주소</td>
-            </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>이름</td>
-                <td>ID</td>
-                <td>주소</td>
-            </tr>
-            <tr>
-                <th scope="row">1</th>
-              <td>이름</td>
-              <td>ID</td>
-              <td>주소</td>
-            </tr>
+
+            <tbody id="t_body">
+
             </tbody>
           </table>
           
