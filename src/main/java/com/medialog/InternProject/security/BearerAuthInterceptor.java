@@ -1,5 +1,7 @@
 package com.medialog.InternProject.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -11,28 +13,26 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class BearerAuthInterceptor implements HandlerInterceptor {
 
+    private Logger logger = LoggerFactory.getLogger(BearerAuthInterceptor.class);
+
     @Autowired
     private AuthorizationExtractor authExtractor;
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
-    public BearerAuthInterceptor(AuthorizationExtractor authExtractor, JwtTokenProvider jwtTokenProvider) {
-        this.authExtractor = authExtractor;
-        this.jwtTokenProvider = jwtTokenProvider;
-    }
 
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) {
-        System.out.println(">>> interceptor.preHandle 호출");
+        logger.info(">>> interceptor.preHandle Called");
         String token = authExtractor.extract(request, "Bearer");
         if (StringUtils.hasLength(token)) {
             return true;
         }
 
         if (!jwtTokenProvider.validateToken(token)) {
-            throw new IllegalArgumentException("유효하지 않은 토큰");
+            throw new IllegalArgumentException("INVALID TOKEN");
         }
 
         String name = jwtTokenProvider.getSubject(token);

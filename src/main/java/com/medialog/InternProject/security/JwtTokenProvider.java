@@ -16,7 +16,7 @@ public class JwtTokenProvider implements TokenProvider {
     private final long validityInMilliseconds=3600000;
 
 
-
+    @Override
     public String createToken(String subject) {
 
         Date now = new Date();
@@ -36,7 +36,7 @@ public class JwtTokenProvider implements TokenProvider {
                 .compact();
     }
 
-
+    @Override
     public String getSubject(String token) {
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(DatatypeConverter.parseBase64Binary(secretKey))
@@ -46,7 +46,7 @@ public class JwtTokenProvider implements TokenProvider {
         return claims.getSubject();
     }
 
-
+    @Override
     public boolean validateToken(String token) {
         try {
             Claims claims = Jwts.parserBuilder()

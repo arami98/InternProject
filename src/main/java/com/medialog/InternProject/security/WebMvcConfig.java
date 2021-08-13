@@ -15,6 +15,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     public void addInterceptors(InterceptorRegistry registry){
         System.out.println(">>> Register Interceptor");
-        registry.addInterceptor(bearerAuthInterceptor).addPathPatterns("/info");
+        registry.addInterceptor(bearerAuthInterceptor).addPathPatterns("/api/test/user");
     }
 }
