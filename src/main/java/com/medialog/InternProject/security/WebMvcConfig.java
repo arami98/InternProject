@@ -23,7 +23,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry){
 
        registry.addInterceptor(bearerAuthInterceptor)
-               .addPathPatterns("/user/register");
+               .addPathPatterns("/user/register")
+               .addPathPatterns("/user/id-check/**")
+               .addPathPatterns("/user/update/**")
+               .addPathPatterns("/test/user");
 
         logger.info(">>> Register Interceptor");
     }
