@@ -44,8 +44,8 @@ public class UserFrom {
 
         user.setAddr(address);
 
-        user.setRegDt(new SimpleDateFormat("yyyy-MM-ddHH:mm:ss.SSSSSSS").parse(regDate));
-        user.setUpdateDt(new SimpleDateFormat("yyyy-MM-ddHH:mm:ss.SSSSSSS").parse(regDate));
+        user.setRegDt(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSSS").parse(regDate));
+        user.setUpdateDt(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSSS").parse(regDate));
         return user;
     }
 }
