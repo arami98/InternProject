@@ -26,7 +26,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                .addPathPatterns("/user/register")
                .addPathPatterns("/user/id-check/**")
                .addPathPatterns("/user/update/**")
-               .addPathPatterns("/test/user");
+               .addPathPatterns("/user/list");
 
         logger.info(">>> Register Interceptor");
     }
