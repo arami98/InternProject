@@ -11,14 +11,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    private Logger logger = LoggerFactory.getLogger(BearerAuthInterceptor.class);
+	private Logger logger = LoggerFactory.getLogger(BearerAuthInterceptor.class);
 
-    @Autowired
-    private HandlerInterceptor bearerAuthInterceptor;
+	@Autowired
+	private HandlerInterceptor bearerAuthInterceptor;
 
-
-    public void addInterceptors(InterceptorRegistry registry){
-        logger.info(">>> Register Interceptor");
-        registry.addInterceptor(bearerAuthInterceptor).addPathPatterns("/api/test/user");
-    }
+	public void addInterceptors(InterceptorRegistry registry) {
+		logger.info(">>> Register Interceptor");
+		registry.addInterceptor(bearerAuthInterceptor).addPathPatterns("/api/test/user");
+	}
 }

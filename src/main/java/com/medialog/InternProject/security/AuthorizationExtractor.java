@@ -1,6 +1,5 @@
 package com.medialog.InternProject.security;
 
-<<<<<<< HEAD
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,13 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Component;
 
-=======
-import jdk.internal.joptsimple.internal.Strings;
-import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
->>>>>>> 450c47b22b45e68d59e6d7e6bbc2baaffc6558c3
 
 @Component
 public class AuthorizationExtractor {
