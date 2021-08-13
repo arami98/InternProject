@@ -60,7 +60,3 @@ public class User {
 	private Date updateDt;
 
 }
-
-enum Auth {
-	agent, user
-}

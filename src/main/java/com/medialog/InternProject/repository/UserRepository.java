@@ -6,4 +6,6 @@ import com.medialog.InternProject.model.User;
 
 public interface UserRepository extends JpaRepository<User, String>{
 
+
+
 }
