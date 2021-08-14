@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/authorization")
+@CrossOrigin(origins = "http://localhost:3000")
 public class AuthorizationController {
     
     @Autowired
@@ -20,18 +22,9 @@ public class AuthorizationController {
 
     @GetMapping("/token")
     public ResponseEntity<TokenResponse> token(){
-
-        HttpHeaders headers = noCorsHttpHeader();
         String token = securityService.createToken("medialog");
         TokenResponse tokenResponse = new TokenResponse(token, "bearer");
-        return new ResponseEntity<TokenResponse>(tokenResponse,headers, HttpStatus.OK);
+        return new ResponseEntity<TokenResponse>(tokenResponse, HttpStatus.OK);
     }
 
-    private HttpHeaders noCorsHttpHeader() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Type", "application/json");
-        headers.add("Access-Control-Allow-Origin", "*");
-        headers.add("mode","no-cors");
-        return headers;
-    }
 }
