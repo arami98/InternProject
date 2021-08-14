@@ -10,7 +10,6 @@ import com.medialog.InternProject.service.RegisterUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,45 +35,36 @@ public class RegisterUserController {
 
         RegisterResponse registerResponse;
 
-        HttpHeaders headers = noCorsHttpHeader();
 
         try {
-            return sucessResponse(userFrom, headers);
+            return sucessResponse(userFrom);
         } catch (ParseException e) {
-            return dateFromException(headers, e);
+            return dateFromException(e);
         } catch (IllegalArgumentException e){
-            return registerFormException(headers, e);
+            return registerFormException(e);
         }
     }
 
-    private ResponseEntity<RegisterResponse> registerFormException(HttpHeaders headers, IllegalArgumentException e) {
+    private ResponseEntity<RegisterResponse> registerFormException(IllegalArgumentException e) {
         RegisterResponse registerResponse;
         logger.warn("ILLEGAL register form");
         registerResponse=new RegisterResponse(e.getMessage(),"Fail");
-        return new ResponseEntity(registerResponse,headers, HttpStatus.OK);
+        return new ResponseEntity(registerResponse, HttpStatus.OK);
     }
 
-    private ResponseEntity<RegisterResponse> dateFromException(HttpHeaders headers, ParseException e) {
+    private ResponseEntity<RegisterResponse> dateFromException(ParseException e) {
         RegisterResponse registerResponse;
         logger.warn("ILLEGAL DATE FORM");
         registerResponse=new RegisterResponse(e.getMessage(),"Fail");
-        return new ResponseEntity(registerResponse,headers, HttpStatus.OK);
+        return new ResponseEntity(registerResponse, HttpStatus.OK);
     }
 
-    private ResponseEntity sucessResponse(UserFrom userFrom, HttpHeaders headers) throws ParseException {
+    private ResponseEntity sucessResponse(UserFrom userFrom) throws ParseException {
         RegisterResponse registerResponse;
         User user = userFrom.extractUser();
         registerUserService.register(user);
         registerResponse=new RegisterResponse("REGISTER SUCCESS","SUCCESS");
-        return new ResponseEntity(registerResponse, headers, HttpStatus.OK);
-    }
-
-    private HttpHeaders noCorsHttpHeader() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Type", "application/json");
-        headers.add("Access-Control-Allow-Origin", "*");
-        headers.add("mode","no-cors");
-        return headers;
+        return new ResponseEntity(registerResponse, HttpStatus.OK);
     }
 
 }
