@@ -5,7 +5,7 @@ buttonUpdate.addEventListener("click", update);
 
 
 function update(_event) {
-	let url = 'http://localhost:8080/api/user/update/' + userForm.id.value;
+	let url = 'http://132.226.230.22:8080/api/user/update/' + userForm.id.value;
 	let data = {
 		"city": userForm.city.value,
 		"country": userForm.country.value,
@@ -18,7 +18,7 @@ function update(_event) {
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify(myData),
+		body: JSON.stringify(data)
 	}).then(res => res.json())
 		.then(response => console.log('Success:', JSON.stringify(response)))
 		.catch(error => console.error('Error:', error));
