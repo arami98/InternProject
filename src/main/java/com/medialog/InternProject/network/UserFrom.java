@@ -1,4 +1,4 @@
-package com.medialog.InternProject.controller;
+package com.medialog.InternProject.network;
 
 import com.medialog.InternProject.model.Auth;
 import com.medialog.InternProject.model.User;
