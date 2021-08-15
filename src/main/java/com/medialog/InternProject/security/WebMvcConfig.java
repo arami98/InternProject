@@ -2,9 +2,8 @@ package com.medialog.InternProject.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -20,6 +19,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         this.bearerAuthInterceptor = bearerAuthInterceptor;
     }
 
+    @Override
     public void addInterceptors(InterceptorRegistry registry){
 
        registry.addInterceptor(bearerAuthInterceptor)
@@ -29,5 +29,17 @@ public class WebMvcConfig implements WebMvcConfigurer {
                .addPathPatterns("/user/list");
 
         logger.info(">>> Register Interceptor");
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/authorization")
+                .allowedOrigins("*")
+                .allowedMethods("GET","PUT","POST")
+                .allowCredentials(false).maxAge(3600);
+        registry.addMapping("/user")
+                .allowedOrigins("*")
+                .allowedMethods("GET","PUT","POST")
+                .allowCredentials(false).maxAge(3600);
     }
 }
