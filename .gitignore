@@ -61,3 +61,7 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+
+# Dependency directories
+node_modules/
+jspm_packages/

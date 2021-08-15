@@ -23,23 +23,40 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry){
 
        registry.addInterceptor(bearerAuthInterceptor)
-               .addPathPatterns("/user/register")
-               .addPathPatterns("/user/id-check/**")
-               .addPathPatterns("/user/update/**")
-               .addPathPatterns("/user/list");
+               .addPathPatterns("/")
+               .excludePathPatterns("/authorization");
 
         logger.info(">>> Register Interceptor");
     }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/authorization")
+
+        registry.addMapping("/authorization/token")
                 .allowedOrigins("*")
-                .allowedMethods("GET","PUT","POST")
+                .allowedMethods("GET")
                 .allowCredentials(false).maxAge(3600);
-        registry.addMapping("/user")
+
+        registry.addMapping("/user/list")
                 .allowedOrigins("*")
-                .allowedMethods("GET","PUT","POST")
+                .allowedMethods("GET")
                 .allowCredentials(false).maxAge(3600);
+
+        registry.addMapping("/user/id-check/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET")
+                .allowCredentials(false).maxAge(3600);
+
+        registry.addMapping("/user/update/**")
+                .allowedOrigins("*")
+                .allowedMethods("PUT")
+                .allowCredentials(false).maxAge(3600);
+
+        registry.addMapping("/user/register")
+                .allowedOrigins("*")
+                .allowedMethods("POST")
+                .allowCredentials(false).maxAge(3600);
+
+
     }
 }
