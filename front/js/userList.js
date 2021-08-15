@@ -7,9 +7,15 @@ xhr.send();
 
 xhr.onreadystatechange = function(e){
     if(xhr.readyState == 4 && xhr.status == 200){
+        
         data = xhr.responseText;
 
         const arr = JSON.parse(data);
+
+        if (Array.isArray(arr) && arr.length < 1){
+            notExistUser();
+        } 
+
 
        for (var i = 0; i < arr.length; i++) { 	
 
@@ -26,7 +32,6 @@ xhr.onreadystatechange = function(e){
             userList.push(user);
         }
 
-        console.log(userList[0].name);
 
         let t_body = document.getElementById("t_body");
 
@@ -40,7 +45,21 @@ xhr.onreadystatechange = function(e){
         
 	
     }
+
+    else if(xhr.status == 404){
+
+    }
 };
+
+
+
+function notExistUser(){
+    let user_list = document.getElementById("user_list");
+    user_list.style.display = 'none';
+
+    let notExist = document.getElementById("notExist");
+    notExist.innerText = "아직 사용자가 존재하지 않습니다";
+}
 
 
 
