@@ -90,9 +90,9 @@
                     <tr>
                         <th>사용권한</th>
                         <td id = "userTypeCheck">
-                            <input type="radio" name="userTypeCheck" value="agent"> 중개인
-                            <input type="radio" name="userTypeCheck" value="user"> 사용자
-                            <input type="text" name="regNo" class="hide" placeholder="등록번호" >
+                            <input type="radio" name="auth" value="agent"  onclick="selectUserType(value)"> 중개인&nbsp;&nbsp;
+                            <input type="radio" name="auth" value="user" onclick="selectUserType(value)"> 사용자&nbsp;&nbsp;
+                            <input type="text" name="reg_no" placeholder="등록번호" id="regNoInput" class = "hide" >
                         </td>
                     </tr>
                 </table>
@@ -107,7 +107,7 @@
             </footer>
 
         </form>
-<!--        <script src="./js/register.js"></script> -->
+            <script src="./js/register.js"></script>
 			<script src="./js/update.js"></script>
 			<script src="./js/idCheck.js"></script>
 
