@@ -1,11 +1,10 @@
-fetch("http://localhost:8080/api/user/list", {
-    method: 'POST',
+fetch("http://localhost:8080/api/authorization/token", {
+    method: 'GET',
     headers: {
         'content-type': 'application/json',
         'Access-Control-Allow-Origin' : '*',
         mode : 'no-cors'
-    },
-    body : JSON.stringify("medialogmedialogmedialogmedialogmedialogmedialogmedialog")
+    }
 }).then(res => res.json())
     .then(res => {
         localStorage.setItem("jwt",res.accessToken)
