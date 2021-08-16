@@ -1,24 +1,26 @@
 const idCheck = document.getElementById("idCheck");
 const idCheckRes = document.getElementById("idCheckRes");
-const BaseURL = "http://localhost:8080/api/user/id-check/";
+const idInput = document.getElementById("id");
+const baseURL = "http://localhost:8080/api/user/id-check/";
 const token = localStorage.getItem("jwt");
+let check = false;
+let id;
 
 idCheck.addEventListener("click", idDupCheck);
+idInput.addEventListener("keyup", idInputCheck);
 
 function idDupCheck(){
-    const id = document.getElementById("id").value.trim();
+    //console.log(token);
     let url;
-
-    if(!idBlankCheck(id))
+    console.log(id);
+    //console.log(check);
+    if(!check){
+        alert("아이디를 다시 확인 해주세요.");
+        idInput.value = null;
         return;
-
-    if(!idLengthCheck(id))
-        return;
-
-    if(!idFormCheck(id))
-        return;
+    }
     
-    url = BaseURL + id;
+    url = baseURL + id;
 
     fetch(url,
         {
@@ -26,19 +28,20 @@ function idDupCheck(){
         headers:  {
             'content-type':'application/json',
             'Access-Control-Allow-Origin' : '*',
+            'mode' : 'no-cors',
             'Authorization': 'Bearer' + token
         } 
     })
         .then(res => res.json())
-        .then(res => {
-            //console.log(res);
-            if(res.result == "UNUSABLE"){
-                idCheckRes.innerHTML = `${res.message}`;
+        .then(data => {
+            //console.log(data);
+            if(data.result == "UNUSABLE"){
+                idCheckRes.innerHTML = data.message;
                 idCheckRes.style.color = "red";
             }
 
-            else if(res.result == "USABLE"){
-                idCheckRes.innerHTML = `${res.message}`;
+            else if(data.result == "USABLE"){
+                idCheckRes.innerHTML = data.message;
                 idCheckRes.style.color = "blue";
             }
         })
@@ -48,12 +51,27 @@ function idDupCheck(){
 
 }
 
+function idInputCheck(){
+    id = idInput.value.replace(/\s/g, "");
+    if(!idBlankCheck(id))
+        return;
+
+    if(!idLengthCheck(id))
+        return;
+
+    if(!idFormCheck(id))
+        return;
+
+    check = true;
+    idCheckRes.innerHTML ="";
+}
+
 //아이디 공백 검사
 function idBlankCheck(id){
     if(id == undefined || id == ""){
         idCheckRes.innerHTML = "아이디를 입력하세요.";
         idCheckRes.style.color = "red"; 
-        // alert("아이디를 입력하세요.");
+        check = false;
         return false;
     }
 
@@ -65,7 +83,7 @@ function idLengthCheck(id){
     if(id.length > 45){
         idCheckRes.innerHTML = "아이디 길이가 너무 깁니다.";
         idCheckRes.style.color = "red"; 
-        //alert("아이디 길이가 너무 깁니다!");
+        check = false;
         return false;
     }
 
@@ -76,7 +94,9 @@ function idLengthCheck(id){
 function idFormCheck(id){
     const regExp = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; 
     if(regExp.test(id)){
-        alert("한글 입력 불가");
+        idCheckRes.innerHTML = "**한글 입력 불가**";
+        idCheckRes.style.color = "red";
+        check = false;
         return false;
     }
 
