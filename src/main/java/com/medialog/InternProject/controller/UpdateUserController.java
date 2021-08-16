@@ -13,7 +13,7 @@ import com.medialog.InternProject.model.User;
 import com.medialog.InternProject.repository.UserRepository;
 
 @RestController
-public class putController {
+public class UpdateUserController {
 
 	@Autowired
 	private UserRepository userRepository;
