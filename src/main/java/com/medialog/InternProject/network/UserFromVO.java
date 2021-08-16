@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 
 @Getter
 @Setter
-public class UserFrom {
+public class UserFromVO {
 
     private String name;
     private String ssn1;
