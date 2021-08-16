@@ -7,8 +7,8 @@ fetch("http://localhost:8080/api/authorization/token", {
     }
 }).then(res => res.json())
     .then(res => {
-        localStorage.setItem("jwt",res.accessToken)
-        alert("인증 되었습니다");
+        localStorage.setItem("jwt",res.accessToken);
+        console.log("토큰 받아옴");
     });
 
                     
