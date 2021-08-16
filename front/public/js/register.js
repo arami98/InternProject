@@ -176,8 +176,8 @@ function  unableSubmitForm(){
     userForm.password.readOnly  = true;
     userForm.passwordCheck.readOnly  = true;
     userForm.email.readOnly  = true;
-    userForm.userTypeRadio[0].disabled  = true;
-    userForm.userTypeRadio[1].disabled  = true;
+    userForm.userTypeRadio[0].readOnly  = true;
+    userForm.userTypeRadio[1].readOnly  = true;
     userForm.reg_no.readOnly  = true;
     emailSelector[0].disabled = true;
 
