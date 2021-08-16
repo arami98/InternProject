@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/authorization")
-@CrossOrigin(origins = "http://localhost:3000")
 public class AuthorizationController {
     
     @Autowired
@@ -23,7 +22,7 @@ public class AuthorizationController {
     @GetMapping("/token")
     public ResponseEntity<TokenResponse> token(){
         String token = securityService.createToken("medialog");
-        TokenResponse tokenResponse = new TokenResponse(token, "bearer");
+        TokenResponse tokenResponse = new TokenResponse(token, "Bearer");
         return new ResponseEntity<TokenResponse>(tokenResponse, HttpStatus.OK);
     }
 
