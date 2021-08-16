@@ -1,3 +1,4 @@
+const url = "http://localhost:8080";
 const userForm = document.querySelector("form");
 const buttonUpdate = document.querySelector("footer").querySelector(".btn#update");
 buttonUpdate.addEventListener("click", update);
@@ -5,21 +6,21 @@ buttonUpdate.addEventListener("click", update);
 
 
 function update(_event) {
-	let url = 'http://localhost:8080/api/user/update/' + userForm.id.value;
+	let uri = url + "/api/user/update/" + userForm.id.value;
 	let data = {
 		"city": userForm.city.value,
 		"country": userForm.country.value,
 		"dong": userForm.dong.value,
 		"code": userForm.code.value
 	};
-	
-	fetch(url, {
-		method: "PUT",
+
+	fetch(uri, {
+		method: 'PUT',
 		headers: {
-			"Content-Type": "application/json",
+			'content-type': 'application/json',
+			'Authorization': 'Bearer ' + localStorage.getItem("jwt"),
 		},
-		body: JSON.stringify(myData),
+		body: JSON.stringify(data)
 	}).then(res => res.json())
-		.then(response => console.log('Success:', JSON.stringify(response)))
-		.catch(error => console.error('Error:', error));
+		.then(json =>console.log(json));
 };
