@@ -1,5 +1,6 @@
-const buttonSubmit = document.querySelector("footer").querySelector(".btn#submit");
-const buttonCancel = document.querySelector("footer").querySelector(".btn#cancel");
+const baseUrl = "http://localhost:8080";
+const buttonSubmit = document.getElementById("register");
+const buttonCancel = document.getElementById("cancel");
 const userForm = document.querySelector("form");
 const passwordCheckInput = userForm.getElementsByTagName("input").passwordCheck;
 const passwordInput = userForm.getElementsByTagName("input").password;
@@ -30,11 +31,10 @@ function handleButtonSubmit(event){
         checkUniqueID();
         hasCheckedPasswordStatus();
         requestUserRegister();
-        unableSubmitForm();
     } catch (error) {
         console.log(error);
     }
-};
+}
 
 function checkUniqueID(){
     const able = "사용 가능한 id입니다.";
@@ -42,10 +42,10 @@ function checkUniqueID(){
     const idCheckRes = document.getElementById("idCheckRes");
 
     if(idCheckRes.innerText === ""){
-        alert("아이디를 입력 해주세요.");
-        throw("아이디 미입력");
-    }else if(idCheckRes.innerText === unAble ){
         alert("아이디 중복검사 해주세요.");
+        throw("아이디 검별");
+    }else if(idCheckRes.innerText === unAble ){
+        alert("중복된 아이디입니다.");
         throw("아이디 중복");
     }
 }
@@ -102,19 +102,106 @@ function emptyFieldException(space){
 
 
 function requestUserRegister(){
+
     console.log("register clciked");
-    //TODO REGISTER USER 
+
+    const date = new Date();
+    const currentTime = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}.${date.getMilliseconds()}`;
+    const updateForm = {
+          name : userForm.name.value ,
+          ssn1 : userForm.ssn1.value ,
+          ssn2 : userForm.ssn2.value ,
+          tel1 : userForm.tel1.value ,
+          tel2 : userForm.tel2.value ,
+          tel3 : userForm.tel3.value ,
+          userId : userForm.id.value,
+          password : userForm.password.value,
+          address : JSON.stringify({
+              city : userForm.city.value,
+              country : userForm.country.value,
+              dong : userForm.dong.value,
+              code : userForm.code.value
+          }),
+          email : userForm.email.value,
+          type : userForm.userTypeRadio.value,
+          regNo : userForm.reg_no.value,
+          regDate : currentTime,
+    };
+
+    console.log(updateForm);
+    
+    fetch(`${baseUrl}/api/user/register`, {
+        method: 'POST',
+        headers: {
+            'content-type':'application/json',
+            'Access-Control-Allow-Origin' : '*',
+            'Authorization': 'Bearer ' + token
+        },
+        body : JSON.stringify(updateForm)
+    }).then(res => res.json())
+        .then(res => {
+          console.log(res);
+          switch(res.message){
+            case "PHONE NUMBER IS INVALID" :
+                alert("올바르지 못한 휴대폰 번호 양식입니다.");
+                break;
+            case "SSN NUMBER IS INVALID" :
+                alert("올바르지 못한 주민번호 양식입니다.");
+                break;
+            case "USER ALREADY EXISTS" :
+                alert("이미 존재하는 유저입니다.");
+                break;
+            case "REGISTER SUCCESS" :
+                alert("등록 완료 되었습니다.");
+                unableSubmitForm();
+                break;
+        }
+        })
+        .catch(res=>{
+            console.log(res);
+        });
 }
 
 
 function  unableSubmitForm(){
-    console.log("unable form");
-    //TODO UNABLE FORM EXCEPT ADDRESS FORM
-}
+    const emailSelector = document.getElementsByName("email_com");
 
+    userForm.name.readOnly  = true;
+    userForm.ssn1.readOnly  = true;
+    userForm.ssn2.readOnly  = true;
+    userForm.tel1.readOnly  = true;
+    userForm.tel2.readOnly  = true;
+    userForm.tel3.readOnly  = true;
+    userForm.id.readOnly  = true;
+    userForm.password.readOnly  = true;
+    userForm.passwordCheck.readOnly  = true;
+    userForm.email.readOnly  = true;
+    userForm.userTypeRadio[0].disabled  = true;
+    userForm.userTypeRadio[1].disabled  = true;
+    userForm.reg_no.readOnly  = true;
+    emailSelector[0].disabled = true;
+
+    userForm.name.classList.add('readOnly');
+    userForm.ssn1.classList.add('readOnly');
+    userForm.ssn2.classList.add('readOnly');
+    userForm.tel1.classList.add('readOnly');
+    userForm.tel2.classList.add('readOnly');
+    userForm.tel3.classList.add('readOnly');
+    userForm.id.classList.add('readOnly');
+    userForm.password.classList.add('readOnly');
+    userForm.passwordCheck.classList.add('readOnly');
+    userForm.email.classList.add('readOnly');
+    userForm.userTypeRadio[0].classList.add('readOnly');
+    userForm.userTypeRadio[1].classList.add('readOnly');
+    userForm.reg_no.classList.add('readOnly');
+    emailSelector[0].classList.add('readOnly');
+
+    buttonSubmit.classList.add('hide');
+
+}
 function handleButtonCancel(){
     window.history.back();
-};
+}
 
 
 

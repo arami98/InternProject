@@ -2,7 +2,8 @@ const xhr = new XMLHttpRequest();
 
 userList = new Array();
 
-xhr.open('GET', 'http://localhost:8080/api/test/user');
+xhr.open('GET', 'http://localhost:8080/api/user/list');
+xhr.setRequestHeader( 'Authorization', 'Bearer '+ localStorage.getItem("jwt"));
 xhr.send();
 
 xhr.onreadystatechange = function(e){
