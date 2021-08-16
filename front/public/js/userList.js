@@ -48,18 +48,18 @@ xhr.onreadystatechange = function(e){
     }
 
     else if(xhr.status == 404){
-
+        alert("페이지를 찾지 못했습니다. 관리자에게 문의해주세요.");
     }
 };
 
 
 
 function notExistUser(){
-    let user_list = document.getElementById("user_list");
-    user_list.style.display = 'none';
+    //let user_list = document.getElementById("user_list");
+    //user_list.style.display = 'none';
 
-    let notExist = document.getElementById("notExist");
-    notExist.innerText = "아직 사용자가 존재하지 않습니다";
+    let t_body = document.getElementById("t_body");
+    t_body.innerHTML += "<tr> <td colspan = '4'> 회원이 존재하지 않습니다 </td> </tr>";
 }
 
 
