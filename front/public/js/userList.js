@@ -16,18 +16,18 @@ fetch(url,
     })
     .then(res => res.json())
     .then(data => {
-        if (Array.isArray(data) && data.length < 1){
+        console.log(data.result);
+        if (data.message == "Empty List"){
             notExistUser();
-        } 
+        }
 
+       for (var i = 0; i < data.result.length; i++) { 	
 
-       for (var i = 0; i < data.length; i++) { 	
-
-            const addr = JSON.parse(data[i].addr);
+            const addr = JSON.parse(data.result[i].addr);
 
             const user = {
-                name : data[i].name,
-                id : data[i].loginId,
+                name : data.result[i].name,
+                id : data.result[i].loginId,
                 city : addr.city,
                 country : addr.country,
                 dong : addr.dong  
