@@ -106,7 +106,7 @@ function requestUserRegister(){
     console.log("register clciked");
 
     const date = new Date();
-    const currentTime = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}.${date.getMilliseconds()}`;
+    const currentTime = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}.${date.getMilliseconds()}`;
     const updateForm = {
           name : userForm.name.value ,
           ssn1 : userForm.ssn1.value ,
@@ -158,6 +158,9 @@ function requestUserRegister(){
         }
         })
         .catch(res=>{
+            if(res.message === "INVALID TOKEN" ){
+                alert("미인증 사용자입니다.");
+            }
             console.log(res);
         });
 }
@@ -165,6 +168,7 @@ function requestUserRegister(){
 
 function  unableSubmitForm(){
     const emailSelector = document.getElementsByName("email_com");
+    const updateButton = document.getElementById("update");
 
     userForm.name.readOnly  = true;
     userForm.ssn1.readOnly  = true;
@@ -198,6 +202,8 @@ function  unableSubmitForm(){
 
     buttonSubmit.classList.add('hide');
 
+    updateButton.classList.remove('hide');
+
 }
 function handleButtonCancel(){
     window.history.back();
@@ -227,6 +233,7 @@ function selectUserType(value){
     const inputRegNo =   document.getElementById('regNoInput');
     if(value == 'agent'){
         inputRegNo.classList.remove('hide');
+
     }else{
         inputRegNo.classList.add('hide');
     }
