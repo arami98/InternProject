@@ -27,12 +27,12 @@
 
                     <tr>
                         <th>주민번호</th>
-                        <td><input type="text" name="ssn1" class="tel" required> - <input type="password" name="ssn2" class="tel" required></td>
+                        <td><input type="text" name="ssn1" class="tel" maxlength='6'    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required> - <input type="password" name="ssn2" class="tel" maxlength='7'   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required></td>
                     </tr>
 
                     <tr>
                         <th>전화번호</th>
-                        <td><input type="tel" name="tel1" class="tel" required> - <input type="tel" name="tel2" class="tel" required> - <input type="tel" name="tel3" class="tel" required></td>
+                        <td><input type="tel" name="tel1" class="tel" maxlength='3'   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required> - <input type="tel" name="tel2" class="tel" maxlength='4' required> - <input type="tel" name="tel3" class="tel" maxlength='4'   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required></td>
                     </tr>
 
                     <tr>
