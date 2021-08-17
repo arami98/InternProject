@@ -1,17 +1,16 @@
-const url = "http://localhost:8080";
-const userForm = document.querySelector("form");
+const form = document.querySelector("form");
 const buttonUpdate = document.querySelector("footer").querySelector(".btn#update");
 buttonUpdate.addEventListener("click", update);
 
 
 
 function update(_event) {
-	let uri = url + "/api/user/update/" + userForm.id.value;
+	let uri = "http://localhost:8080/api/user/update/" + form.id.value;
 	let data = {
-		"city": userForm.city.value,
-		"country": userForm.country.value,
-		"dong": userForm.dong.value,
-		"code": userForm.code.value
+		"city": form.city.value,
+		"country": form.country.value,
+		"dong": form.dong.value,
+		"code": form.code.value
 	};
 
 	fetch(uri, {
@@ -23,4 +22,6 @@ function update(_event) {
 		body: JSON.stringify(data)
 	}).then(res => res.json())
 		.then(json =>console.log(json));
+		
+    alert("수정 완료 되었습니다.");	
 };
