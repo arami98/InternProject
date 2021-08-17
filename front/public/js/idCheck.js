@@ -20,15 +20,12 @@ function idDupCheck(){
     }
     
     url = baseURL + id;
-    console.log(url);
 
     fetch(url,
         {
         method: 'get',
         headers:  {
             'content-type':'application/json',
-            'Access-Control-Allow-Origin' : '*',
-            'mode' : 'no-cors',
             'Authorization': 'Bearer ' + token
         } 
     })
