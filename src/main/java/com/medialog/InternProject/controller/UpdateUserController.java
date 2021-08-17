@@ -43,10 +43,6 @@ public class UpdateUserController {
 		User userUpdate = userRepository.findById(id).orElseThrow(() -> {
 			throw new IllegalArgumentException("NOT USER");
 		});
-
-		if (addr == null || addr.isEmpty()) {
-			return new ResponseEntity<RegisterResponse>(new RegisterResponse("NULL ADDR","FAIL"), HttpStatus.NOT_FOUND);
-		}
 		
 		Date date = new Date();
 		userUpdate.setAddr(addr);
