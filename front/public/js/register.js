@@ -1,4 +1,4 @@
-const baseUrl = "http://193.123.254.182/:8080";
+const baseUrl = "http://193.123.254.182:8080";
 const buttonSubmit = document.getElementById("register");
 const buttonCancel = document.getElementById("cancel");
 const userForm = document.querySelector("form");
