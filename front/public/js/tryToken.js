@@ -1,4 +1,4 @@
-fetch("http://localhost:8080/api/authorization/token", {
+fetch("http://193.123.254.182:8080/api/authorization/token", {
     method: 'GET',
     headers: {
         'content-type': 'application/json',

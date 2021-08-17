@@ -2,7 +2,7 @@ const xhr = new XMLHttpRequest();
 
 const token = localStorage.getItem("jwt");
 
-const url = 'http://localhost:8080/api/user/list';
+const url = 'http://193.123.254.182:8080/api/user/list';
 
 userList = new Array();
 

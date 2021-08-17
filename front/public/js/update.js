@@ -5,7 +5,7 @@ buttonUpdate.addEventListener("click", update);
 
 
 function update(_event) {
-	let uri = "http://localhost:8080/api/user/update/" + form.id.value;
+	let uri = "http://193.123.254.182:8080/api/user/update/" + form.id.value;
 	let data = {
 		"city": form.city.value,
 		"country": form.country.value,

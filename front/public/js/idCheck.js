@@ -1,7 +1,7 @@
 const idCheck = document.getElementById("idCheck");
 const idCheckRes = document.getElementById("idCheckRes");
 const idInput = document.getElementById("id");
-const baseURL = "http://localhost:8080/api/user/id-check/";
+const baseURL = "http://193.123.254.182:8080/api/user/id-check/";
 const token = localStorage.getItem("jwt");
 let check = false;
 let id;
