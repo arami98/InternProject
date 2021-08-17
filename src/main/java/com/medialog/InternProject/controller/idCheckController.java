@@ -1,6 +1,11 @@
 package com.medialog.InternProject.controller;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,23 +22,34 @@ public class idCheckController {
 	private UserRepository userRepository;
 	
 	@GetMapping("/user/id-check/{id}")
-	public IdCheckResponse idCheck(@PathVariable String id) {
+	public ResponseEntity<IdCheckResponse> idCheck(@PathVariable String id) {
 		IdCheckResponse idCheckRes = new IdCheckResponse();
 		boolean flag = userRepository.existsById(id);
 		String message, status;
+		String regExp = ".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*";
+
+		if(id.length() > 45) {
+			idCheckRes.setMessage("ID LENGTH IS TOO LONG");
+			idCheckRes.setResult("Fail");
+			return new ResponseEntity<IdCheckResponse>(idCheckRes,new HttpHeaders(),HttpStatus.NOT_FOUND);
+		}
+		
+		if(id.matches(regExp)) {
+			idCheckRes.setMessage("ID FORM ERROR");
+			idCheckRes.setResult("Fail");
+			return new ResponseEntity<IdCheckResponse>(idCheckRes,new HttpHeaders(),HttpStatus.NOT_FOUND);
+		}
 		
 		if(flag == true) {
-			message = "이미 사용중인 id입니다.";
-			status = "UNUSABLE";
+			idCheckRes.setMessage("이미 사용중인 id입니다.");
+			idCheckRes.setResult("UNUSABLE");
+			 return new ResponseEntity<IdCheckResponse>(idCheckRes,new HttpHeaders(), HttpStatus.OK);
 		}
 		else {
-			message = "사용 가능한 id입니다.";
-			status = "USABLE";
+			idCheckRes.setMessage("사용 가능한 id입니다.");
+			idCheckRes.setResult("USABLE");
+			 return new ResponseEntity<IdCheckResponse>(idCheckRes,new HttpHeaders(), HttpStatus.OK);
 		}
-		
-		idCheckRes.setMessage(message);
-		idCheckRes.setResult(status);
-		return idCheckRes;
 	}
 	
 	@Getter
