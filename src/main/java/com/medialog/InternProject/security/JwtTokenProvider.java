@@ -54,9 +54,13 @@ public class JwtTokenProvider implements TokenProvider {
                     .build()
                     .parseClaimsJws(token)
                     .getBody();
-            return !claims.getExpiration().before(new Date());
+            return !claims.getExpiration().before(new Date()) && checkSubject(token);
         } catch (JwtException | IllegalArgumentException e) {
             return false;
         }
+    }
+
+    private boolean checkSubject(String token){
+        return getSubject(token).equals("medialog");
     }
 }

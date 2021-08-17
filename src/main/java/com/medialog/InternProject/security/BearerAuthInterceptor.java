@@ -28,13 +28,16 @@ public class BearerAuthInterceptor implements HandlerInterceptor {
                              HttpServletResponse response, Object handler) {
         logger.info(">>> interceptor.preHandle Called");
         String token = authExtractor.extract(request, "Bearer ");
-        if (StringUtils.hasLength(token)) {
-            return true;
-        }
 
         if (!jwtTokenProvider.validateToken(token)) {
             throw new IllegalArgumentException("INVALID TOKEN");
         }
+
+        if (StringUtils.hasLength(token)) {
+            return true;
+        }
+
+
 
         String name = jwtTokenProvider.getSubject(token);
         request.setAttribute("name", name);
