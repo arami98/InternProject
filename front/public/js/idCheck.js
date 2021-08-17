@@ -12,7 +12,6 @@ idInput.addEventListener("keyup", idInputCheck);
 function idDupCheck(){
     //console.log(token);
     let url;
-    console.log(id);
     //console.log(check);
     if(!check){
         alert("아이디를 다시 확인 해주세요.");
@@ -21,6 +20,7 @@ function idDupCheck(){
     }
     
     url = baseURL + id;
+    console.log(url);
 
     fetch(url,
         {
@@ -29,7 +29,7 @@ function idDupCheck(){
             'content-type':'application/json',
             'Access-Control-Allow-Origin' : '*',
             'mode' : 'no-cors',
-            'Authorization': 'Bearer' + token
+            'Authorization': 'Bearer ' + token
         } 
     })
         .then(res => res.json())
