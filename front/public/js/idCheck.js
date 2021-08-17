@@ -43,6 +43,10 @@ function idDupCheck(){
             }
         })
         .catch(err => {
+            if(err.message == "INVALID TOKEN"){
+                alert("유효하지 않은 토큰값입니다.");
+                console.log("INVALID TOKEN");
+            }
             console.log("Fetch Err.", err);
         });
 
