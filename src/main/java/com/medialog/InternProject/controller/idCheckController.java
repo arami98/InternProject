@@ -25,21 +25,24 @@ public class idCheckController {
 	public ResponseEntity<IdCheckResponse> idCheck(@PathVariable String id) {
 		IdCheckResponse idCheckRes = new IdCheckResponse();
 		boolean flag = userRepository.existsById(id);
-		String message, status;
 		String regExp = ".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*";
 
+		//아이디 길이 체크
 		if(id.length() > 45) {
 			idCheckRes.setMessage("ID LENGTH IS TOO LONG");
 			idCheckRes.setResult("Fail");
 			return new ResponseEntity<IdCheckResponse>(idCheckRes,new HttpHeaders(),HttpStatus.NOT_FOUND);
 		}
 		
+		//아이디 형식 체크
 		if(id.matches(regExp)) {
 			idCheckRes.setMessage("ID FORM ERROR");
 			idCheckRes.setResult("Fail");
 			return new ResponseEntity<IdCheckResponse>(idCheckRes,new HttpHeaders(),HttpStatus.NOT_FOUND);
 		}
 		
+		
+		//아이디 사용 여부 확인
 		if(flag == true) {
 			idCheckRes.setMessage("이미 사용중인 id입니다.");
 			idCheckRes.setResult("UNUSABLE");
