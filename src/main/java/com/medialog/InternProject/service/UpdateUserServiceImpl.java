@@ -37,7 +37,7 @@ public class UpdateUserServiceImpl implements UpdateUserService {
 		return userUpdate;
 	}
 
-	private void checkAddr(String addr) throws IllegalArgumentException {
+	private void checkAddr(String addr) throws IllegalArgumentException, JSONException{
 		try {
 			JSONObject jObject = new JSONObject(addr);
 			String city = jObject.getString("city");
