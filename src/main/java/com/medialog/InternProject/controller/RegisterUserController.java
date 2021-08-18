@@ -45,7 +45,7 @@ public class RegisterUserController {
         }
     }
 
-    private ResponseEntity<RegisterResponse> successResponse(UserFromVO userFrom) throws ParseException, InvalidDataAccessApiUsageException {
+    private ResponseEntity<RegisterResponse> successResponse(UserFromVO userFrom) throws ParseException, InvalidDataAccessApiUsageException,IllegalArgumentException {
         RegisterResponse registerResponse;
         User user = userFrom.extractUser();
         registerUserService.register(user);
