@@ -49,15 +49,18 @@ public class JwtTokenProvider implements TokenProvider {
     @Override
     public boolean validateToken(String token) {
         try {
-            Claims claims = Jwts.parserBuilder()
-                    .setSigningKey(DatatypeConverter.parseBase64Binary(secretKey))
-                    .build()
-                    .parseClaimsJws(token)
-                    .getBody();
-            return !claims.getExpiration().before(new Date()) && checkSubject(token);
+            return isExpired(token) && checkSubject(token);
         } catch (JwtException | IllegalArgumentException e) {
             return false;
         }
+    }
+
+    private Boolean isExpired(String token) {
+        return Jwts.parserBuilder()
+                        .setSigningKey(DatatypeConverter.parseBase64Binary(secretKey))
+                        .build()
+                        .parseClaimsJws(token)
+                        .getBody().getExpiration().before(new Date());
     }
 
     private boolean checkSubject(String token){
