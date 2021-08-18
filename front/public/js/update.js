@@ -5,7 +5,7 @@ buttonUpdate.addEventListener("click", update);
 
 
 function update() {
-	let uri = "http://localhost:8080/api/user/update/" + form.id.value;
+	let uri = "http://193.123.254.182:8080/api/user/update/" + form.id.value;
 	
 	let data = {
 		"city": form.city.value,
@@ -31,16 +31,13 @@ function update() {
             case "NULL ADDRESS" :
                 alert("주소를 모두 기입 해주세요.");
                 break;
+            case "INVALID TOKEN" :
+                alert("미인증 사용자입니다.");
+                break;
             case "UPUDATE SUCCESS" :
                 alert("수정 완료 되었습니다.");
                 unableSubmitForm();
                 break;
         }
-        })
-        .catch(res=>{
-            if(res.message === "INVALID TOKEN" ){
-                alert("미인증 사용자입니다.");
-            }
-            console.log(res);
         });
 };
